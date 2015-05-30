@@ -6,4 +6,5 @@ class Merchant < ActiveRecord::Base
   validates :email, presence: true
 
   has_many :orders, dependent: :destroy
+  has_many :products, dependent: :destroy
 end

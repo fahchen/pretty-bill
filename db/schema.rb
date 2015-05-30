@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150530135158) do
+ActiveRecord::Schema.define(version: 20150530140130) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "zip_code",         limit: 255, default: "000000", null: false
@@ -68,11 +68,14 @@ ActiveRecord::Schema.define(version: 20150530135158) do
   add_index "orders", ["merchant_id"], name: "index_orders_on_merchant_id"
 
   create_table "products", force: :cascade do |t|
-    t.string   "name",       limit: 255,                                       null: false
-    t.decimal  "price",                  precision: 8, scale: 2, default: 0.0
-    t.string   "unit",                                           default: "个"
-    t.datetime "created_at",                                                   null: false
-    t.datetime "updated_at",                                                   null: false
+    t.string   "name",        limit: 255,                                       null: false
+    t.decimal  "price",                   precision: 8, scale: 2, default: 0.0
+    t.string   "unit",                                            default: "个"
+    t.datetime "created_at",                                                    null: false
+    t.datetime "updated_at",                                                    null: false
+    t.integer  "merchant_id"
   end
+
+  add_index "products", ["merchant_id"], name: "index_products_on_merchant_id"
 
 end
