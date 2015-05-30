@@ -5,4 +5,7 @@ class Order < ActiveRecord::Base
 
   validates :merchant, presence: true
   validates :customer, presence: true
+
+  accepts_nested_attributes_for :customer
+  accepts_nested_attributes_for :order_items, allow_destroy: true
 end

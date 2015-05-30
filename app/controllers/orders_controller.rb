@@ -16,6 +16,8 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     @order = @merchant.orders.new
+    @order.build_customer
+    @order.order_items.build
   end
 
   # GET /orders/1/edit
@@ -42,7 +44,7 @@ class OrdersController < ApplicationController
   # PATCH/PUT /orders/1.json
   def update
     respond_to do |format|
-      if @order.update(order_params)
+      if @order.update_attributes(order_params)
         format.html { redirect_to [@merchant, @order], notice: 'Order was successfully updated.' }
         format.json { render :show, status: :ok, location: [@merchant, @order] }
       else
@@ -73,6 +75,6 @@ class OrdersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def order_params
-    params.require(:order).permit(:transacted_at)
+    params.require(:order).permit(:transacted_at, customer_attributes: [:name, :phone, :gender], order_items_attributes: [:product_id, :quantity, :_destroy])
   end
 end

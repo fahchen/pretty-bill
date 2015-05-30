@@ -2,9 +2,22 @@
   .panel-body
     = simple_form_for([@merchant, @order]) do |f|
       = f.error_notification
+      = f.hidden_field :merchant_id
 
-      .form-inputs
       = f.input :transacted_at
+
+      .row
+        = f.simple_fields_for :customer, as: :customer_attributes do |customer_form|
+          = customer_form.input :name, wrapper_html: { class: 'col-xs-5' }
+          = customer_form.input :gender, collection: Customer.genders.map { |key, _| [Customer::GENDER[key.to_sym], key] }, include_blank: '--性别--', wrapper_html: { class: 'col-xs-2' }
+          = customer_form.input :phone, wrapper_html: { class: 'col-xs-5' }
+
+      = f.association :order_items do |order_item_form|
+        .row
+          = order_item_form.input :product_id, collection: @merchant.products, label_method: :name, value_method: :id, as: :select, wrapper_html: { class: 'col-xs-3' }
+          = order_item_form.input :price, disabled: true, wrapper_html: { class: 'col-xs-3' }
+          = order_item_form.input :quantity, wrapper_html: { class: 'col-xs-3' }
+          = order_item_form.input :total, disabled: true, wrapper_html: { class: 'col-xs-3' }
 
       .form-actions
         = f.button :submit, class: 'btn btn-primary'
