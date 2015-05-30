@@ -7,7 +7,7 @@
       = f.input :transacted_at, as: :string, input_html: { value: (@order.transacted_at || Time.now).to_formatted_s(:db) }
 
       .row
-        = f.simple_fields_for :customer, as: :customer_attributes do |customer_form|
+        = f.association :customer do |customer_form|
           = customer_form.hidden_field :id
           = customer_form.input :name, wrapper_html: { class: 'col-xs-8 col-md-5' }
           = customer_form.input :gender, collection: Customer.genders.map { |key, _| [Customer::GENDER[key.to_sym], key] }, include_blank: '--性别--', wrapper_html: { class: 'col-xs-4 col-md-2' }

@@ -8,4 +8,8 @@ class Order < ActiveRecord::Base
 
   accepts_nested_attributes_for :customer
   accepts_nested_attributes_for :order_items, allow_destroy: true
+
+  def total_cost
+    self.total_cost = order_items.map(&:total).sum
+  end
 end
