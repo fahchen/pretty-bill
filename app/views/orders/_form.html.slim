@@ -4,16 +4,18 @@
       = f.error_notification
       = f.hidden_field :merchant_id
 
-      = f.input :transacted_at
+      = f.input :transacted_at, as: :string, input_html: { value: (@order.transacted_at || Time.now).to_formatted_s(:db) }
 
       .row
         = f.simple_fields_for :customer, as: :customer_attributes do |customer_form|
-          = customer_form.input :name, wrapper_html: { class: 'col-xs-5' }
-          = customer_form.input :gender, collection: Customer.genders.map { |key, _| [Customer::GENDER[key.to_sym], key] }, include_blank: '--性别--', wrapper_html: { class: 'col-xs-2' }
-          = customer_form.input :phone, wrapper_html: { class: 'col-xs-5' }
+          = customer_form.hidden_field :id
+          = customer_form.input :name, wrapper_html: { class: 'col-xs-8 col-md-5' }
+          = customer_form.input :gender, collection: Customer.genders.map { |key, _| [Customer::GENDER[key.to_sym], key] }, include_blank: '--性别--', wrapper_html: { class: 'col-xs-4 col-md-2' }
+          = customer_form.input :phone, wrapper_html: { class: 'col-xs-12 col-md-5' }
 
       = f.association :order_items do |order_item_form|
         .row
+          = order_item_form.hidden_field :id
           = order_item_form.input :product_id, collection: @merchant.products, label_method: :name, value_method: :id, as: :select, wrapper_html: { class: 'col-xs-3' }
           = order_item_form.input :price, disabled: true, wrapper_html: { class: 'col-xs-3' }
           = order_item_form.input :quantity, wrapper_html: { class: 'col-xs-3' }

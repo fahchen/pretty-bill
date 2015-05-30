@@ -21,6 +21,9 @@ gem 'simple_form'
 gem 'slim-rails'
 gem 'china_city'
 gem 'rails-i18n'
+gem 'momentjs-rails'
+gem 'smalot-datetimepicker-rails'
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_21]

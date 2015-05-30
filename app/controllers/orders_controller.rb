@@ -70,11 +70,11 @@ class OrdersController < ApplicationController
   end
   # Use callbacks to share common setup or constraints between actions.
   def set_order
-    @order = @merchant.orders.find(params[:id])
+    @order = @merchant.orders.includes(:customer, order_items: [:product]).find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def order_params
-    params.require(:order).permit(:transacted_at, customer_attributes: [:name, :phone, :gender], order_items_attributes: [:product_id, :quantity, :_destroy])
+    params.require(:order).permit(:transacted_at, customer_attributes: [:id, :name, :phone, :gender], order_items_attributes: [:id, :product_id, :quantity, :_destroy])
   end
 end

@@ -16,3 +16,6 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require 'china_city/jquery.china_city'
+//= require moment
+//= require bootstrap-datetimepicker
+//= require orders
