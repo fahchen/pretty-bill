@@ -2,4 +2,7 @@ class Order < ActiveRecord::Base
   belongs_to :merchant
   belongs_to :customer
   has_many :order_items, dependent: :destroy
+
+  validates :merchant, presence: true
+  validates :customer, presence: true
 end

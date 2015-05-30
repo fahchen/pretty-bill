@@ -1,0 +1,19 @@
+.page-header
+  h1 订单详情
+
+- if notice
+  .alert.alert-info role="alert"= notice
+
+.panel.panel-primary
+  .panel-heading 详细信息
+  .panel-body
+    dl
+      dt Name:
+      dd = @order.customer.name
+      dt Total cost:
+      dd = @order.total_cost
+      dt Transacted at:
+      dd = I18n.l(@order.transacted_at, format: :long)
+
+=<> link_to 'Edit', edit_merchant_order_path(@merchant, @order), class: 'btn btn-primary'
+=<> link_to 'Back', merchant_path(@merchant), class: 'btn btn-default'

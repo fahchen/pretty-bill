@@ -1,9 +1,8 @@
 .page-header
-  h1= @merchant.name
+  h1 Editing order
 
 == render 'form'
 
-=<> link_to 'Show', [@merchant, @product], class: 'btn btn-success'
+=<> link_to 'Show', [@merchant, @order], class: 'btn btn-success'
 =<> link_to 'Back', merchant_path(@merchant), class: 'btn btn-default'
-
 

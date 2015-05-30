@@ -11,6 +11,7 @@ class MerchantsController < ApplicationController
   # GET /merchants/1.json
   def show
     @products = @merchant.products
+    @orders = @merchant.orders
   end
 
   # GET /merchants/new
