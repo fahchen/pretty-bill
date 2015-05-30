@@ -1,4 +1,6 @@
 class Customer < ActiveRecord::Base
+  include Addressable
+
   enum gender: [:male, :female]
 
   validates :name, presence: true
