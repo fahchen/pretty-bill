@@ -15,6 +15,26 @@
       dt Address:
       dd = @merchant.full_address
 
+.panel.panel-success
+  .panel-heading 所有商品
+  table.table
+    thead
+      tr
+        th Name
+        th Price
+        th Unit
+        th Actions
+    tbody
+      - @products.each do |product|
+        tr
+          td = product.name
+          td = product.price
+          td = product.unit
+          td
+            /=<> link_to 'Show', product
+            /=<> link_to 'Edit', edit_merchant_product_path(merchant)
+            /=<> link_to 'Destroy', [merchant, product], data: {:confirm => 'Are you sure?'}, :method => :delete
+
 footer.footer
   =<> link_to 'Edit', edit_merchant_path(@merchant), class: 'btn btn-primary'
   =<> link_to 'Back', merchants_path, class: 'btn btn-default'
