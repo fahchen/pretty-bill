@@ -1,0 +1,12 @@
+.panel.panel-default
+  .panel-body
+    = simple_form_for([@merchant, @product]) do |f|
+      = f.error_notification
+
+      .form-inputs
+      = f.input :name
+      = f.input :price
+      = f.input :unit
+
+      .form-actions
+        = f.button :submit, class: 'btn btn-primary'

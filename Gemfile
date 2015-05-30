@@ -20,6 +20,7 @@ gem 'puma'
 gem 'simple_form'
 gem 'slim-rails'
 gem 'china_city'
+gem 'rails-i18n'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_21]

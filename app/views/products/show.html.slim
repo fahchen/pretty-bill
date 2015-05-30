@@ -1,0 +1,19 @@
+.page-header
+  h1= @product.name
+
+- if notice
+  .alert.alert-info role="alert"= notice
+
+.panel.panel-primary
+  .panel-heading 详细信息
+  .panel-body
+    dl
+      dt Name:
+      dd = @product.name
+      dt Price:
+      dd = @product.price
+      dt Unit:
+      dd = @product.unit
+
+=<> link_to 'Edit', edit_merchant_product_path(@merchant, @product), class: 'btn btn-primary'
+=<> link_to 'Back', merchant_path(@merchant), class: 'btn btn-default'

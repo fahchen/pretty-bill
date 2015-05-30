@@ -16,7 +16,10 @@
       dd = @merchant.full_address
 
 .panel.panel-success
-  .panel-heading 所有商品
+  .panel-heading
+    .pull-right
+      = link_to 'Add', new_merchant_product_path(@merchant), class: 'btn btn-xs btn-success'
+    | 所有商品
   table.table
     thead
       tr
@@ -31,9 +34,9 @@
           td = product.price
           td = product.unit
           td
-            /=<> link_to 'Show', product
-            /=<> link_to 'Edit', edit_merchant_product_path(merchant)
-            /=<> link_to 'Destroy', [merchant, product], data: {:confirm => 'Are you sure?'}, :method => :delete
+            =<> link_to 'Show', [@merchant, product]
+            =<> link_to 'Edit', edit_merchant_product_path(@merchant, product)
+            =<> link_to 'Destroy', [@merchant, product], data: {:confirm => 'Are you sure?'}, :method => :delete
 
 footer.footer
   =<> link_to 'Edit', edit_merchant_path(@merchant), class: 'btn btn-primary'
