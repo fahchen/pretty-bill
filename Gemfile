@@ -6,6 +6,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
+gem 'jquery-turbolinks'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 group :development, :test do
@@ -18,6 +19,7 @@ gem 'high_voltage'
 gem 'puma'
 gem 'simple_form'
 gem 'slim-rails'
+gem 'china_city'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_21]

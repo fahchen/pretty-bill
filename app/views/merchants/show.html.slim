@@ -12,6 +12,8 @@
       dd = @merchant.tel
       dt Email:
       dd = @merchant.email
+      dt Address:
+      dd = @merchant.full_address
 
 footer.footer
   =<> link_to 'Edit', edit_merchant_path(@merchant), class: 'btn btn-primary'

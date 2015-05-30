@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150530065536) do
+ActiveRecord::Schema.define(version: 20150530135158) do
 
   create_table "addresses", force: :cascade do |t|
-    t.string   "zip_code",         limit: 255, null: false
+    t.string   "zip_code",         limit: 255, default: "000000", null: false
     t.string   "detail",           limit: 255
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
     t.integer  "addressable_id"
     t.string   "addressable_type"
   end

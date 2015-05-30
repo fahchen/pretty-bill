@@ -9,6 +9,7 @@
         th Name
         th Tel
         th Email
+        th Address
         th Actions
 
     tbody
@@ -17,6 +18,7 @@
           td = merchant.name
           td = merchant.tel
           td = merchant.email
+          td = ChinaCity.get(merchant.address.try(:zip_code), prepend_parent: true)
           td
             =<> link_to 'Show', merchant
             =<> link_to 'Edit', edit_merchant_path(merchant)
