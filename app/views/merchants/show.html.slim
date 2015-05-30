@@ -1,6 +1,18 @@
-p#notice = notice
+.page-header
+  h1= @merchant.name
 
+- if notice
+  .alert.alert-info role="alert"= notice
 
-= link_to 'Edit', edit_merchant_path(@merchant)
-'|
-= link_to 'Back', merchants_path
+.panel.panel-primary
+  .panel-heading 详细信息
+  .panel-body
+    dl
+      dt Tel:
+      dd = @merchant.tel
+      dt Email:
+      dd = @merchant.email
+
+footer.footer
+  =<> link_to 'Edit', edit_merchant_path(@merchant), class: 'btn btn-primary'
+  =<> link_to 'Back', merchants_path, class: 'btn btn-default'
