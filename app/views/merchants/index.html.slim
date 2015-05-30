@@ -1,19 +1,27 @@
-h1 Listing merchants
+.page-header
+  h1 Listing merchants
 
-table
-  thead
-    tr
-      th
-      th
-      th
 
-  tbody
-    - @merchants.each do |merchant|
+.panel.panel-default
+  table.table
+    thead
       tr
-        td = link_to 'Show', merchant
-        td = link_to 'Edit', edit_merchant_path(merchant)
-        td = link_to 'Destroy', merchant, data: {:confirm => 'Are you sure?'}, :method => :delete
+        th Name
+        th Tel
+        th Email
+        th Actions
 
-br
+    tbody
+      - @merchants.each do |merchant|
+        tr
+          td = merchant.name
+          td = merchant.tel
+          td = merchant.email
+          td
+            =<> link_to 'Show', merchant
+            =<> link_to 'Edit', edit_merchant_path(merchant)
+            =<> link_to 'Destroy', merchant, data: {:confirm => 'Are you sure?'}, :method => :delete
+
 
 = link_to 'New Merchant', new_merchant_path, class: 'btn btn-primary'
+
