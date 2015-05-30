@@ -10,6 +10,9 @@ class Order < ActiveRecord::Base
   accepts_nested_attributes_for :order_items, allow_destroy: true
 
   def total_cost
-    self.total_cost = order_items.map(&:total).sum
+    if !caculated_at? || caculated_at < updated_at
+      update_columns total_cost: order_items.map(&:total).sum, caculated_at: Time.now
+    end
+    super
   end
 end

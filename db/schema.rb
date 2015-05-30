@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150530145253) do
+ActiveRecord::Schema.define(version: 20150530191241) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "zip_code",         limit: 255, default: "000000", null: false
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20150530145253) do
     t.datetime "transacted_at"
     t.datetime "created_at",                                          null: false
     t.datetime "updated_at",                                          null: false
+    t.datetime "caculated_at"
   end
 
   add_index "orders", ["customer_id"], name: "index_orders_on_customer_id"
