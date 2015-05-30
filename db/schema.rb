@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150530140130) do
+ActiveRecord::Schema.define(version: 20150530145253) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "zip_code",         limit: 255, default: "000000", null: false
@@ -58,7 +58,6 @@ ActiveRecord::Schema.define(version: 20150530140130) do
     t.integer  "merchant_id"
     t.integer  "customer_id"
     t.decimal  "total_cost",    precision: 8, scale: 2, default: 0.0
-    t.decimal  "price",         precision: 8, scale: 2, default: 0.0
     t.datetime "transacted_at"
     t.datetime "created_at",                                          null: false
     t.datetime "updated_at",                                          null: false
