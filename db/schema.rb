@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150530191241) do
+ActiveRecord::Schema.define(version: 20150531044456) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "zip_code",         limit: 255, default: "000000", null: false
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20150530191241) do
     t.text     "remark"
     t.datetime "created_at",                                       null: false
     t.datetime "updated_at",                                       null: false
+    t.decimal  "discount",   precision: 8, scale: 2, default: 1.0
   end
 
   add_index "order_items", ["order_id"], name: "index_order_items_on_order_id"
