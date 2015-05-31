@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :set_merchant
-  before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :report]
 
   # GET /orders
   # GET /orders.json
@@ -68,6 +68,10 @@ class OrdersController < ApplicationController
     @order = Order.new
     @order_item = @order.order_items.build
     render 'add_order', layout: false
+  end
+
+  def report
+    render file: 'public/report', layout: false
   end
 
   private

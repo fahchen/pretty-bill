@@ -5,6 +5,10 @@ Rails.application.routes.draw do
       collection do
         get :add_order_item
       end
+
+      member do
+        get :report
+      end
     end
   end
 
