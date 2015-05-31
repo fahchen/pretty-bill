@@ -7,7 +7,7 @@ $ () ->
     todayHighlight: true
     forceParse: false
 
-  $('.js-order-item').on 'change', '.product', (event) =>
+  $('.order-item-form').on 'change', '.js-order-item .product', (event) =>
     product_html = $(event.target)
     price_html = $(event.target).closest('.js-order-item').find('.price')
     quantity_html = $(event.target).closest('.js-order-item').find('.quantity')
@@ -21,7 +21,7 @@ $ () ->
       price_html.val(product.price)
       total_html.val(product.price * quantity_html.val())
 
-  .on 'change', '.quantity', (event) =>
+  .on 'change', '.js-order-item .quantity', (event) =>
     quantity_html = $(event.target)
     price_html = $(event.target).closest('.js-order-item').find('.price')
     total_html = $(event.target).closest('.js-order-item').find('.total')
@@ -29,10 +29,23 @@ $ () ->
 
     total_html.val(total)
 
-  .on 'click', '.destroy', (event) =>
+  .on 'click', '.js-order-item .destroy', (event) =>
     destroy_btn = $(event.target)
     order_item_html = destroy_btn.closest('.js-order-item')
     destroy_html = order_item_html.find('.destroy')
 
     destroy_html.val(1)
     order_item_html.hide()
+
+  .on 'click', '.js-order-item-add', (event) =>
+    merchant_id = location.pathname.match(///merchants\/(\d+)///)[1]
+
+    $.get("/merchants/#{merchant_id}/orders/add_order_item").success (data, status, jqxhr)=>
+      rand = new Date().getTime()
+      order_item_data = data.replace ///order\[order_items_attributes\]\[0\]///g, "order[order_items_attributes][#{rand}]"
+      order_item_form = $(order_item_data)
+      order_items_html = $('.order-items')
+      order_item_html = order_item_form.find('.js-order-item')
+
+      order_items_html.append order_item_html
+

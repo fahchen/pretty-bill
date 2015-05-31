@@ -64,6 +64,12 @@ class OrdersController < ApplicationController
     end
   end
 
+  def add_order_item
+    @order = Order.new
+    @order_item = @order.order_items.build
+    render 'add_order', layout: false
+  end
+
   private
   def set_merchant
     @merchant = Merchant.find(params[:merchant_id])
