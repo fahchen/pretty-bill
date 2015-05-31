@@ -3,6 +3,7 @@ class OrderItem < ActiveRecord::Base
   belongs_to :product
 
   validates :product, presence: true
+  validates :discount, presence: true
 
   after_initialize :update_total
 
@@ -14,7 +15,7 @@ class OrderItem < ActiveRecord::Base
   def update_total
     if product
       self.price = product.price
-      self.total = price * quantity.to_i
+      self.total = price * quantity.to_i * discount
     end
   end
 end

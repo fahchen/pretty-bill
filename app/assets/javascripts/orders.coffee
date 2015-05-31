@@ -19,15 +19,15 @@ $ () ->
     $.get("/merchants/#{merchant_id}/products/#{product_id}.json").success (data, status, jqxhr)=>
       product = data
       price_html.val(product.price)
-      total_html.val(product.price * quantity_html.val())
+      update_total(product_html.closest('.js-order-item'))
 
-  .on 'change', '.js-order-item .quantity', (event) =>
-    quantity_html = $(event.target)
-    price_html = $(event.target).closest('.js-order-item').find('.price')
-    total_html = $(event.target).closest('.js-order-item').find('.total')
-    total = price_html.val() * quantity_html.val()
+  .on 'change', '.js-order-item .discount', (event) =>
+    update_total($(event.target).closest('.js-order-item'))
 
     total_html.val(total)
+
+  .on 'change', '.js-order-item .quantity', (event) =>
+    update_total($(event.target).closest('.js-order-item'))
 
   .on 'click', '.js-order-item .destroy', (event) =>
     destroy_btn = $(event.target)
@@ -49,3 +49,11 @@ $ () ->
 
       order_items_html.append order_item_html
 
+  update_total = (order_item_html) ->
+    price_html = order_item_html.find('.price')
+    discount_html = order_item_html.find('.discount')
+    quantity_html = order_item_html.find('.quantity')
+    total_html = order_item_html.find('.total')
+    total = price_html.val() * quantity_html.val() * discount_html.val()
+
+    total_html.val(total)
