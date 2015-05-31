@@ -28,3 +28,11 @@ $ () ->
     total = price_html.val() * quantity_html.val()
 
     total_html.val(total)
+
+  .on 'click', '.destroy', (event) =>
+    destroy_btn = $(event.target)
+    order_item_html = destroy_btn.closest('.js-order-item')
+    destroy_html = order_item_html.find('.destroy')
+
+    destroy_html.val(1)
+    order_item_html.hide()
