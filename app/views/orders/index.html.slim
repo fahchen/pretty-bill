@@ -1,18 +1,19 @@
 h1 Listing orders
 
-table
-  thead
-    tr
-      th
-      th
-      th
-
-  tbody
-    - @orders.each do |order|
+.table-responsive
+  table
+    thead
       tr
-        td = link_to 'Show', order
-        td = link_to 'Edit', edit_order_path(order)
-        td = link_to 'Destroy', order, data: {:confirm => 'Are you sure?'}, :method => :delete
+        th
+        th
+        th
+
+    tbody
+      - @orders.each do |order|
+        tr
+          td = link_to 'Show', order
+          td = link_to 'Edit', edit_order_path(order)
+          td = link_to 'Destroy', order, data: {:confirm => 'Are you sure?'}, :method => :delete
 
 br
 

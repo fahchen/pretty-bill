@@ -3,26 +3,27 @@
 
 
 .panel.panel-default
-  table.table
-    thead
-      tr
-        th Name
-        th Tel
-        th Email
-        th Address
-        th Actions
-
-    tbody
-      - @merchants.each do |merchant|
+  .table-responsive
+    table.table
+      thead
         tr
-          td = merchant.name
-          td = merchant.tel
-          td = merchant.email
-          td = ChinaCity.get(merchant.address.try(:zip_code), prepend_parent: true)
-          td
-            =<> link_to 'Show', merchant
-            =<> link_to 'Edit', edit_merchant_path(merchant)
-            =<> link_to 'Destroy', merchant, data: {:confirm => 'Are you sure?'}, :method => :delete
+          th Name
+          th Tel
+          th Email
+          th Address
+          th Actions
+
+      tbody
+        - @merchants.each do |merchant|
+          tr
+            td = merchant.name
+            td = merchant.tel
+            td = merchant.email
+            td = ChinaCity.get(merchant.address.try(:zip_code), prepend_parent: true)
+            td
+              =<> link_to 'Show', merchant
+              =<> link_to 'Edit', edit_merchant_path(merchant)
+              =<> link_to 'Destroy', merchant, data: {:confirm => 'Are you sure?'}, :method => :delete
 
 
 = link_to 'New Merchant', new_merchant_path, class: 'btn btn-primary'

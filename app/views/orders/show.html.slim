@@ -10,21 +10,22 @@
     dl
       dt Name:
       dd = @order.customer.name
-  table.table
-    thead
-      th Name
-      th Price
-      th Quantity
-      th Discount
-      th Total
-    tbody
-      - @order.order_items.each do |order_item|
-        tr
-          td= order_item.product.name
-          td= order_item.product.price
-          td= order_item.quantity_with_unit
-          td= order_item.discount
-          td= order_item.total
+  .table-responsive
+    table.table
+      thead
+        th Name
+        th Price
+        th Quantity
+        th Discount
+        th Total
+      tbody
+        - @order.order_items.each do |order_item|
+          tr
+            td= order_item.product.name
+            td= order_item.product.price
+            td= order_item.quantity_with_unit
+            td= order_item.discount
+            td= order_item.total
   .panel-body
     dl
       dt Total cost:
