@@ -19,3 +19,5 @@
 //= require moment
 //= require bootstrap-datetimepicker
 //= require orders
+//= require Chart
+//= require angular

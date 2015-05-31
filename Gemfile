@@ -23,6 +23,8 @@ gem 'china_city'
 gem 'rails-i18n'
 gem 'momentjs-rails'
 gem 'smalot-datetimepicker-rails'
+gem 'chart-js-rails'
+gem 'angularjs-rails'
 
 group :development do
   gem 'better_errors'
