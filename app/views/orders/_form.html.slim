@@ -27,6 +27,9 @@
               label.control-label Actions
               = link_to 'Delete', '##', class: 'btn btn-danger destroy'
 
+      .form-group
+        p Total cost
+        p.js-order-total-cost= @order.total_cost
       .form-actions
         = f.button :submit, class: 'btn btn-primary'
         = link_to 'Add order item', '##', class: 'btn btn-success pull-right js-order-item-add'

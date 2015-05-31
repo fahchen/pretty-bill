@@ -1,4 +1,7 @@
 $ () ->
+  if $('.order-items').length > 0
+    update_total_cost
+
   $('#order_transacted_at').datetimepicker
     format: 'yyyy-mm-dd hh:ii::ss'
     autoclose: true
@@ -36,6 +39,7 @@ $ () ->
 
     destroy_html.val(1)
     order_item_html.hide()
+    update_total_cost()
 
   .on 'click', '.js-order-item-add', (event) =>
     merchant_id = location.pathname.match(///merchants\/(\d+)///)[1]
@@ -56,4 +60,14 @@ $ () ->
     total_html = order_item_html.find('.total')
     total = price_html.val() * quantity_html.val() * discount_html.val()
 
-    total_html.val(total)
+    total_html.val(total.toFixed(2))
+    update_total_cost()
+
+  update_total_cost = () ->
+    total_cost = 0.0
+
+    for order_item_html in $('.order-items').find('.js-order-item')
+       if $(order_item_html).find('.destroy').val() == 'false'
+        total_cost += parseFloat($(order_item_html).find('.total').val())
+
+    $('.js-order-total-cost').html(total_cost.toFixed(2))
