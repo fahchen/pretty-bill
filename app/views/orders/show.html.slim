@@ -38,3 +38,4 @@
 
 .pull-right
   =<> link_to 'Report', report_merchant_order_path(@merchant, @order), class: 'btn btn-primary'
+  =<> link_to 'Invoice', invoice_merchant_order_path(@merchant, @order, format: :pdf), class: 'btn btn-success'

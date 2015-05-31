@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
       member do
         get :report
+        get :invoice
       end
     end
   end

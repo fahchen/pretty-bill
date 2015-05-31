@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :set_merchant
-  before_action :set_order, only: [:show, :edit, :update, :destroy, :report]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :report, :invoice]
 
   # GET /orders
   # GET /orders.json
@@ -72,6 +72,10 @@ class OrdersController < ApplicationController
 
   def report
     render file: 'public/report', layout: false
+  end
+
+  def invoice
+    send_file 'public/invoice.pdf'
   end
 
   private
