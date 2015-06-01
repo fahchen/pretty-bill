@@ -11,6 +11,13 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree .
+//= require bootstrap-sprockets
+//= require 'china_city/jquery.china_city'
+//= require moment
+//= require bootstrap-datetimepicker
+//= require orders
+//= require Chart
+//= require angular

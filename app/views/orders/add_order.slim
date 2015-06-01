@@ -1,0 +1,14 @@
+= simple_form_for([@merchant, @order]) do |f|
+  = f.association :order_items, as: "order[order_items_attributes][#{Time.now.to_i}]" do |order_item_form|
+    .row.js-order-item
+      = order_item_form.hidden_field :id
+      = order_item_form.input :product_id, collection: @merchant.products, label_method: :name, value_method: :id, as: :select, wrapper_html: { class: 'col-md-3 col-xs-6' }, input_html: { class: 'product' }
+      = order_item_form.input :price, disabled: true, wrapper_html: { class: 'col-md-2 col-xs-6' }, input_html: { class: 'price' }
+      = order_item_form.input :quantity, wrapper_html: { class: 'col-md-2 col-xs-6' }, input_html: { class: 'quantity', min: 1 }
+      = order_item_form.input :discount, wrapper_html: { class: 'col-md-2 col-xs-6' }, input_html: { class: 'discount', max: 1 }
+      = order_item_form.input :total, disabled: true, wrapper_html: { class: 'col-md-2 col-xs-6' }, input_html: { class: 'total' }
+      = order_item_form.hidden_field :_destroy, class: 'destroy'
+      .form-group.col-md-1.col-xs-6
+        label.control-label Actions
+        = link_to 'Delete', '##', class: 'btn btn-danger destroy'
+

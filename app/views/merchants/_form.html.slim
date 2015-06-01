@@ -1,0 +1,34 @@
+.panel.panel-default
+  .panel-body
+    = simple_form_for(@merchant) do |f|
+      = f.error_notification
+
+      .form-inputs
+      = f.input :name
+      = f.input :tel
+      = f.input :email
+      = f.fields_for :address do |address_fields|
+        - address = address_fields.object
+        - zip_code = address.zip_code.presence || '000000'
+        - province = ChinaCity.province(zip_code)
+        - city = ChinaCity.city(zip_code)
+        - district = address.zip_code
+        - provinces  = ChinaCity.list
+        - cities     = ChinaCity.list(province)
+        - districtes = ChinaCity.list(city)
+
+        .form-group
+          label.string.required.control-label for="merchant_name" Address City
+          .city-group.row
+            .col-sm-4
+              = address_fields.select :zip_code, options_for_select(provinces, province), { include_blank: '--省份--' }, { class: 'form-control city-select' }
+            .col-sm-4
+              = address_fields.select :zip_code, options_for_select(cities, city), { include_blank: '--城市--' }, { class: 'form-control city-select' }
+            .col-sm-4
+              = address_fields.select :zip_code, options_for_select(districtes, district), { include_blank: '--地区--' }, { class: 'form-control city-select' }
+        .form-group
+          label.string.required.control-label for="merchant_name" Address Detail
+          = address_fields.text_field :detail, class: 'form-control'
+
+      .form-actions
+        = f.button :submit, class: 'btn btn-primary'

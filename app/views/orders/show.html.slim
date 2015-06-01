@@ -1,0 +1,41 @@
+.page-header
+  h1 订单详情
+
+- if notice
+  .alert.alert-info role="alert"= notice
+
+.panel.panel-primary
+  .panel-heading 详细信息
+  .panel-body
+    dl
+      dt Name:
+      dd = @order.customer.name
+  .table-responsive
+    table.table
+      thead
+        th Name
+        th Price
+        th Quantity
+        th Discount
+        th Total
+      tbody
+        - @order.order_items.each do |order_item|
+          tr
+            td= order_item.product.name
+            td= order_item.product.price
+            td= order_item.quantity_with_unit
+            td= order_item.discount
+            td= order_item.total
+  .panel-body
+    dl
+      dt Total cost:
+      dd = @order.total_cost
+      dt Transacted at:
+      dd = I18n.l(@order.transacted_at, format: :long)
+
+=<> link_to 'Edit', edit_merchant_order_path(@merchant, @order), class: 'btn btn-primary'
+=<> link_to 'Back', merchant_path(@merchant), class: 'btn btn-default'
+
+.pull-right
+  =<> link_to 'Report', report_merchant_order_path(@merchant, @order), class: 'btn btn-primary'
+  =<> link_to 'Invoice', invoice_merchant_order_path(@merchant, @order, format: :pdf), class: 'btn btn-success'

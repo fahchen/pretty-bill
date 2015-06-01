@@ -1,0 +1,35 @@
+.panel.panel-default.order-item-form
+  .panel-body
+    = simple_form_for([@merchant, @order]) do |f|
+      = f.error_notification
+      = f.hidden_field :merchant_id
+
+      = f.input :transacted_at, as: :string, input_html: { value: (@order.transacted_at || Time.now).to_formatted_s(:db) }
+
+      .row
+        = f.association :customer do |customer_form|
+          = customer_form.hidden_field :id
+          = customer_form.input :name, wrapper_html: { class: 'col-xs-8 col-md-5' }
+          = customer_form.input :gender, collection: Customer.genders.map { |key, _| [Customer::GENDER[key.to_sym], key] }, include_blank: '--性别--', wrapper_html: { class: 'col-xs-4 col-md-2' }
+          = customer_form.input :phone, wrapper_html: { class: 'col-xs-12 col-md-5' }
+
+      .order-items
+        = f.association :order_items do |order_item_form|
+          .row.js-order-item
+            = order_item_form.hidden_field :id
+            = order_item_form.input :product_id, collection: @merchant.products, label_method: :name, value_method: :id, as: :select, wrapper_html: { class: 'col-md-3 col-xs-6' }, input_html: { class: 'product' }
+            = order_item_form.input :price, disabled: true, wrapper_html: { class: 'col-md-2 col-xs-6' }, input_html: { class: 'price' }
+            = order_item_form.input :quantity, wrapper_html: { class: 'col-md-2 col-xs-6' }, input_html: { class: 'quantity', min: 1 }
+            = order_item_form.input :discount, wrapper_html: { class: 'col-md-2 col-xs-6' }, input_html: { class: 'discount', max: 1 }
+            = order_item_form.input :total, disabled: true, wrapper_html: { class: 'col-md-2 col-xs-6' }, input_html: { class: 'total' }
+            = order_item_form.hidden_field :_destroy, class: 'destroy'
+            .form-group.col-md-1.col-xs-1
+              label.control-label Actions
+              = link_to 'Delete', '##', class: 'btn btn-danger destroy'
+
+      .form-group
+        p Total cost
+        p.js-order-total-cost= @order.total_cost
+      .form-actions
+        = f.button :submit, class: 'btn btn-primary'
+        = link_to 'Add order item', '##', class: 'btn btn-success pull-right js-order-item-add'

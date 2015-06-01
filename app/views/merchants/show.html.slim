@@ -1,0 +1,68 @@
+.page-header
+  h1= @merchant.name
+
+- if notice
+  .alert.alert-info role="alert"= notice
+
+.panel.panel-primary
+  .panel-heading 详细信息
+  .panel-body
+    dl
+      dt Tel:
+      dd = @merchant.tel
+      dt Email:
+      dd = @merchant.email
+      dt Address:
+      dd = @merchant.full_address
+
+.panel.panel-success
+  .panel-heading
+    .pull-right
+      = link_to 'Add', new_merchant_product_path(@merchant), class: 'btn btn-xs btn-success'
+    | 所有商品
+  .table-responsive
+    table.table
+      thead
+        tr
+          th Name
+          th Price
+          th Unit
+          th Actions
+      tbody
+        - @products.each do |product|
+          tr
+            td = product.name
+            td = product.price
+            td = product.unit
+            td
+              =<> link_to 'Show', [@merchant, product]
+              =<> link_to 'Edit', edit_merchant_product_path(@merchant, product)
+              =<> link_to 'Destroy', [@merchant, product], data: {:confirm => 'Are you sure?'}, :method => :delete
+
+.panel.panel-success
+  .panel-heading
+    .pull-right
+      = link_to 'New', new_merchant_order_path(@merchant), class: 'btn btn-xs btn-success'
+    | 所有订单
+  .table-responsive
+    table.table
+      thead
+        tr
+          th Customer
+          th Total Cost
+          th Transacted at
+          th Actions
+      tbody
+        - @orders.each do |order|
+          tr
+            td = order.customer.name
+            td = order.total_cost
+            td = I18n.l(order.transacted_at, format: :long)
+            td
+              =<> link_to 'Show', [@merchant, order]
+              =<> link_to 'Edit', edit_merchant_order_path(@merchant, order)
+              =<> link_to 'Destroy', [@merchant, order], data: {:confirm => 'Are you sure?'}, :method => :delete
+
+footer.footer
+  =<> link_to 'Edit', edit_merchant_path(@merchant), class: 'btn btn-primary'
+  =<> link_to 'Back', merchants_path, class: 'btn btn-default'
